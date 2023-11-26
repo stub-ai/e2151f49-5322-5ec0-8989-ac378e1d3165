@@ -5,6 +5,9 @@ type TicketData = {
   title: string;
   description: string;
   file: File | null;
+  status: string;
+  label: string;
+  department: string;
 };
 
 const Ticket = () => {
@@ -12,9 +15,16 @@ const Ticket = () => {
     title: '',
     description: '',
     file: null,
+    status: '',
+    label: '',
+    department: '',
   });
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setTicketData({ ...ticketData, [e.target.name]: e.target.value });
+  };
+
+  const handleSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setTicketData({ ...ticketData, [e.target.name]: e.target.value });
   };
 
@@ -31,6 +41,9 @@ const Ticket = () => {
     const formData = new FormData();
     formData.append('title', ticketData.title);
     formData.append('description', ticketData.description);
+    formData.append('status', ticketData.status);
+    formData.append('label', ticketData.label);
+    formData.append('department', ticketData.department);
     if (ticketData.file) {
       formData.append('file', ticketData.file);
     }
@@ -50,6 +63,21 @@ const Ticket = () => {
     <form onSubmit={handleSubmit}>
       <input name="title" value={ticketData.title} onChange={handleInputChange} />
       <textarea name="description" value={ticketData.description} onChange={handleTextAreaChange} />
+      <select name="status" value={ticketData.status} onChange={handleSelectChange}>
+        <option value="">Select status</option>
+        <option value="open">Open</option>
+        <option value="closed">Closed</option>
+      </select>
+      <select name="label" value={ticketData.label} onChange={handleSelectChange}>
+        <option value="">Select label</option>
+        <option value="bug">Bug</option>
+        <option value="feature">Feature</option>
+      </select>
+      <select name="department" value={ticketData.department} onChange={handleSelectChange}>
+        <option value="">Select department</option>
+        <option value="sales">Sales</option>
+        <option value="support">Support</option>
+      </select>
       <input type="file" onChange={handleFileChange} />
       <button type="submit">Create Ticket</button>
     </form>
