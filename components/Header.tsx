@@ -20,6 +20,11 @@ const Header = () => {
                 <a className="text-indigo-600 hover:text-indigo-900">Login</a>
               </Link>
             </li>
+            <li>
+              <Link href="/register">
+                <a className="text-indigo-600 hover:text-indigo-900">Register</a>
+              </Link>
+            </li>
           </ul>
         </nav>
       </div>
