@@ -1,7 +1,7 @@
 import User from '../components/User';
 
-const RegisterPage = () => {
+const LoginPage = () => {
   return <User />;
 };
 
-export default RegisterPage;
+export default LoginPage;
