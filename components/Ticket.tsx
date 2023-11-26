@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import CannedResponse, { CannedResponseData } from './CannedResponse';
 
 const Ticket = () => {
-  const [cannedResponses, setCannedResponses] = useState([]);
+  const [cannedResponses, setCannedResponses] = useState<CannedResponseData[]>([]);
 
   const fetchCannedResponses = async () => {
     try {
@@ -13,12 +14,17 @@ const Ticket = () => {
     }
   };
 
+  const handleAddCannedResponse = (response: CannedResponseData) => {
+    setCannedResponses([...cannedResponses, response]);
+  };
+
   useEffect(() => {
     fetchCannedResponses();
   }, []);
 
   return (
     <div>
+      <CannedResponse onAdd={handleAddCannedResponse} />
       {/* Render your canned responses here */}
     </div>
   );

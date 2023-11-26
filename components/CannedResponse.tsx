@@ -1,12 +1,12 @@
 import React, { useState, ChangeEvent } from 'react';
 import axios from 'axios';
 
-type CannedResponseData = {
+export type CannedResponseData = {
   title: string;
   content: string;
 };
 
-const CannedResponse = () => {
+const CannedResponse = ({ onAdd }: { onAdd: (response: CannedResponseData) => void }) => {
   const [cannedResponseData, setCannedResponseData] = useState<CannedResponseData>({
     title: '',
     content: '',
@@ -24,6 +24,7 @@ const CannedResponse = () => {
     e.preventDefault();
     try {
       const response = await axios.post('/api/canned-responses', cannedResponseData);
+      onAdd(cannedResponseData);
       // Handle successful canned response creation
     } catch (error) {
       // Handle error
