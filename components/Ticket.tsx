@@ -8,6 +8,7 @@ type TicketData = {
   status: string;
   label: string;
   department: string;
+  priority: string;
 };
 
 const Ticket = () => {
@@ -18,6 +19,7 @@ const Ticket = () => {
     status: '',
     label: '',
     department: '',
+    priority: '',
   });
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -44,6 +46,7 @@ const Ticket = () => {
     formData.append('status', ticketData.status);
     formData.append('label', ticketData.label);
     formData.append('department', ticketData.department);
+    formData.append('priority', ticketData.priority);
     if (ticketData.file) {
       formData.append('file', ticketData.file);
     }
@@ -77,6 +80,12 @@ const Ticket = () => {
         <option value="">Select department</option>
         <option value="sales">Sales</option>
         <option value="support">Support</option>
+      </select>
+      <select name="priority" value={ticketData.priority} onChange={handleSelectChange}>
+        <option value="">Select priority</option>
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
       </select>
       <input type="file" onChange={handleFileChange} />
       <button type="submit">Create Ticket</button>
